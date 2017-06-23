@@ -35,16 +35,6 @@ class NoteAreaComponent extends UiStatefulComponent<NoteAreaProps, NoteAreaState
   }
 
   @override
-  Map componentWillUpdate(nextProps, nextState) {
-    if (nextProps != null) {
-      if (nextProps.activeNote != props.activeNote) {
-        this.setState(newState()
-          ..noteText = nextProps.activeNote.text);
-      }
-    }
-  }
-
-  @override
   render(){
     return (
       VBlock()(
