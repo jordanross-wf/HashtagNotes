@@ -1,0 +1,18 @@
+name: Simple_Dart_Project
+description: An absolute bare-bones web app.
+version: 0.0.1
+
+#dependencies:
+dev_dependencies:
+  browser: '>=0.10.0 <0.11.0'
+  w_flux: '2.6.0'
+  dart_to_js_script_rewriter: '^1.0.1'
+  web_skin_dart:
+    hosted:
+      name: web_skin_dart
+      url: https://pub.workiva.org
+    version: "^1.23.2"
+
+transformers:
+- web_skin_dart
+- dart_to_js_script_rewriter
