@@ -63,7 +63,6 @@ class NoteListComponent extends UiStatefulComponent<NoteListProps, NoteListState
   }
 
   void _handleListSelect(SyntheticMouseEvent event, Object targetKey) {
-    print("You clicked targetKey: `$targetKey`!");
     if (targetKey == -1) {
       props.createNote(new Note("A new note!"));
     } else {

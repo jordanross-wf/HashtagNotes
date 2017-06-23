@@ -29,12 +29,10 @@ class AppComponent extends UiStatefulComponent<AppProps, AppState>{
 
   dynamic createNote(Note newNote) {
     if (newNote != null) {
-      print('created new note!');
       var activeNote = state.activeNote;
       if (activeNote == null) {
         activeNote = newNote;
       }
-      print('activeNote should now be $activeNote');
 
       this.setState(
           newState()
@@ -53,8 +51,6 @@ class AppComponent extends UiStatefulComponent<AppProps, AppState>{
             ..notes = new List.from(state.notes)
             ..activeNote = note
       );
-    } else {
-      print('tried to save null note?');
     }
   }
 
@@ -62,25 +58,19 @@ class AppComponent extends UiStatefulComponent<AppProps, AppState>{
     if (noteIndex != null && noteIndex >= 0 && noteIndex < state.notes.length) {
       Note note = state.notes[noteIndex];
       if (note != null) {
-        print('changed active note!');
         this.setState(
             newState()
               ..notes = new List.from(state.notes)
               ..activeNote = note
         );
-      } else {
-        print('note was null when pulled from state');
       }
-    } else {
-      var length = state.notes.length;
-      print('could not change active note, index was $noteIndex, and length is $length');
     }
   }
 
   @override
   render(){
     return (Dom.div())(
-        Dom.h1()("Das Notas"),
+        Dom.h1()("Hashtag Notes!"),
         renderNoteContent()
     );
   }

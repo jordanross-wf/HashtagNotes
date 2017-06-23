@@ -35,6 +35,16 @@ class NoteAreaComponent extends UiStatefulComponent<NoteAreaProps, NoteAreaState
   }
 
   @override
+  void componentWillReceiveProps(Map nextProps) {
+    super.componentWillReceiveProps(nextProps);
+
+    if (nextProps.containsKey('NoteAreaProps.activeNote')) {
+      Note nextNote = nextProps['NoteAreaProps.activeNote'];
+      setState(newState()..noteText = nextNote.text);
+    }
+  }
+
+  @override
   render(){
     return (
       VBlock()(
@@ -57,7 +67,6 @@ class NoteAreaComponent extends UiStatefulComponent<NoteAreaProps, NoteAreaState
   }
 
   void _updateNoteText(SyntheticFormEvent event) {
-    print('note text updated');
     setState(newState()..noteText = event.target.value);
   }
 

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e721a3c5-b6f2-4b04-9cff-96fcc115cf66" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/src/components/NoteArea.dart" afterPath="$PROJECT_DIR$/web/src/components/NoteArea.dart" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/src/components/NoteList.dart" afterPath="$PROJECT_DIR$/web/src/components/NoteList.dart" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/src/components/app.dart" afterPath="$PROJECT_DIR$/web/src/components/app.dart" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,8 +42,8 @@
       <file leaf-file-name="app.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/src/components/app.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="96" column="5" lean-forward="true" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
+            <state relative-caret-position="285">
+              <caret line="62" column="50" lean-forward="true" selection-start-line="62" selection-start-column="50" selection-end-line="62" selection-end-column="50" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -54,8 +54,8 @@
       <file leaf-file-name="NoteList.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/src/components/NoteList.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="568">
-              <caret line="38" column="19" lean-forward="false" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
+            <state relative-caret-position="975">
+              <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -66,8 +66,8 @@
       <file leaf-file-name="NoteArea.dart" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/src/components/NoteArea.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="41" column="29" lean-forward="true" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
+            <state relative-caret-position="930">
+              <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -154,9 +154,9 @@
         <option value="$PROJECT_DIR$/web/styles.css" />
         <option value="$PROJECT_DIR$/web/src/components/Note.dart" />
         <option value="$PROJECT_DIR$/web/src/components/EmptyNoteView.dart" />
-        <option value="$PROJECT_DIR$/web/src/components/app.dart" />
-        <option value="$PROJECT_DIR$/web/src/components/NoteList.dart" />
         <option value="$PROJECT_DIR$/web/src/components/NoteArea.dart" />
+        <option value="$PROJECT_DIR$/web/src/components/NoteList.dart" />
+        <option value="$PROJECT_DIR$/web/src/components/app.dart" />
       </list>
     </option>
   </component>
@@ -700,38 +700,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/src/components/NoteList.dart">
+    <entry file="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/over_react-1.10.0/lib/src/component_declaration/component_base.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
-          <caret line="38" column="19" lean-forward="false" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="457">
+          <caret line="153" column="29" lean-forward="true" selection-start-line="153" selection-start-column="29" selection-end-line="153" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/src/components/app.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="96" column="5" lean-forward="true" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
+        <state relative-caret-position="285">
+          <caret line="62" column="50" lean-forward="true" selection-start-line="62" selection-start-column="50" selection-end-line="62" selection-end-column="50" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/over_react-1.10.0/lib/src/component_declaration/component_base.dart">
+    <entry file="file://$PROJECT_DIR$/web/src/components/NoteList.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="147" column="7" lean-forward="false" selection-start-line="147" selection-start-column="7" selection-end-line="147" selection-end-column="7" />
-          <folding />
+        <state relative-caret-position="975">
+          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/src/components/NoteArea.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="29" lean-forward="true" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
+        <state relative-caret-position="930">
+          <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
           </folding>
