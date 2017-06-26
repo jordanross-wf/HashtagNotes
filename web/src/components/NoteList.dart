@@ -1,6 +1,6 @@
 import 'package:web_skin_dart/ui_core.dart';
 import 'package:web_skin_dart/ui_components.dart';
-import 'Note.dart';
+import 'models/Note.dart';
 import 'dart:math';
 
 @Factory()
@@ -64,7 +64,7 @@ class NoteListComponent extends UiStatefulComponent<NoteListProps, NoteListState
 
   void _handleListSelect(SyntheticMouseEvent event, Object targetKey) {
     if (targetKey == -1) {
-      props.createNote(new Note("A new note!"));
+      props.createNote(new Note(text: "A new note!"));
     } else {
       props.changeActiveNote(targetKey);
     }

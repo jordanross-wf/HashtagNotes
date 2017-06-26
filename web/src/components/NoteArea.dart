@@ -1,7 +1,7 @@
 import 'package:web_skin_dart/ui_core.dart';
 import 'package:web_skin_dart/ui_components.dart';
 
-import 'Note.dart';
+import 'models/Note.dart';
 
 @Factory()
 UiFactory<NoteAreaProps> NoteArea;

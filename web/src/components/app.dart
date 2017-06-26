@@ -3,7 +3,7 @@ import 'package:web_skin_dart/ui_components.dart';
 import 'TagList.dart';
 import 'NoteArea.dart';
 import 'NoteList.dart';
-import 'Note.dart';
+import 'models/Note.dart';
 import 'EmptyNoteView.dart';
 
 @Factory()
@@ -45,7 +45,7 @@ class AppComponent extends UiStatefulComponent<AppProps, AppState>{
   dynamic saveNote(Note note, String text) {
     if (note != null) {
       print('saved note!');
-      note.setText(text);
+      note.change(text: text);
       this.setState(
           newState()
             ..notes = new List.from(state.notes)
@@ -107,6 +107,6 @@ class AppComponent extends UiStatefulComponent<AppProps, AppState>{
   }
   
   void _createEmptyNote(_) {
-    createNote(new Note(''));
+    createNote(new Note(text: ''));
   }
 }
