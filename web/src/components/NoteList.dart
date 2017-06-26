@@ -2,6 +2,7 @@ import 'package:web_skin_dart/ui_core.dart';
 import 'package:web_skin_dart/ui_components.dart';
 import 'models/Note.dart';
 import 'dart:math';
+import 'actions.dart';
 
 @Factory()
 UiFactory<NoteListProps> NoteList;
@@ -9,17 +10,12 @@ UiFactory<NoteListProps> NoteList;
 @Props()
 class NoteListProps extends UiProps{
   List<Note> notes;
-  var changeActiveNote;
-  var createNote;
-}
-
-@State()
-class NoteListState extends UiState{
-
+  NoteActions actions;
+  Note activeNote;
 }
 
 @Component()
-class NoteListComponent extends UiStatefulComponent<NoteListProps, NoteListState>{
+class NoteListComponent extends UiComponent<NoteListProps>{
   @override
   render(){
     return (
@@ -33,11 +29,20 @@ class NoteListComponent extends UiStatefulComponent<NoteListProps, NoteListState
     );
   }
 
+  @override
+  void componentWillReceiveProps(Map nextProps) {
+    super.componentWillReceiveProps(nextProps);
+
+    if (nextProps.containsKey('NoteListProps.activeNote')) {
+      Note nextNote = nextProps['NoteListProps.activeNote'];
+    }
+  }
+
   List renderNotes() {
     List notes = [];
     if (this.props.notes.isNotEmpty) {
       int index = 0;
-      for (var note in this.props.notes) {
+      for (var note in props.notes) {
         var noteText = note.text;
         var previewEnd = min(14, noteText.length);
         var previewText = noteText.substring(0, previewEnd);
@@ -46,6 +51,7 @@ class NoteListComponent extends UiStatefulComponent<NoteListProps, NoteListState
           ..key = index
           ..targetKey = index++
           ..onSelect = _handleListSelect
+          ..isActive = note == props.activeNote
         )(previewText);
         notes.add(listItem);
       }
@@ -64,19 +70,10 @@ class NoteListComponent extends UiStatefulComponent<NoteListProps, NoteListState
 
   void _handleListSelect(SyntheticMouseEvent event, Object targetKey) {
     if (targetKey == -1) {
-      props.createNote(new Note(text: "A new note!"));
+      props.actions.createNote(new Note(text: 'A new note!'));
     } else {
-      props.changeActiveNote(targetKey);
+      Note note = props.notes[targetKey];
+      props.actions.changeActiveNote(note);
     }
   }
 }
-
-
-/*
-
-react_dom.js:18121 Warning: setState(...):
-Cannot update during an existing state transition
- (such as within `render` or another component's constructor). Render methods should
- be a pure function of props and state; constructor side-effects are an anti-pattern,
- but can be moved to `componentWillMount`.
- */

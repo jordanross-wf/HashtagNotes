@@ -2,6 +2,7 @@ import 'package:web_skin_dart/ui_core.dart';
 import 'package:web_skin_dart/ui_components.dart';
 
 import 'models/Note.dart';
+import 'actions.dart';
 
 @Factory()
 UiFactory<NoteAreaProps> NoteArea;
@@ -9,7 +10,7 @@ UiFactory<NoteAreaProps> NoteArea;
 @Props()
 class NoteAreaProps extends UiProps{
   Note activeNote;
-  var updateNote;
+  NoteActions actions;
 }
 
 @State()
@@ -29,7 +30,7 @@ class NoteAreaComponent extends UiStatefulComponent<NoteAreaProps, NoteAreaState
     } else {
       return (
         newState()
-          ..noteText = "error: null active note"
+          ..noteText = null
       );
     }
   }
@@ -40,7 +41,7 @@ class NoteAreaComponent extends UiStatefulComponent<NoteAreaProps, NoteAreaState
 
     if (nextProps.containsKey('NoteAreaProps.activeNote')) {
       Note nextNote = nextProps['NoteAreaProps.activeNote'];
-      setState(newState()..noteText = nextNote.text);
+      setState(newState()..noteText = nextNote != null ? nextNote.text : null);
     }
   }
 
@@ -48,13 +49,17 @@ class NoteAreaComponent extends UiStatefulComponent<NoteAreaProps, NoteAreaState
   render(){
     return (
       VBlock()(
-        (BlockContent()..shrink = true)(
+        (BlockContent()
+          ..shrink = true
+          ..collapse = BlockCollapse.BOTTOM
+        )(
           (AutosizeTextarea()
             ..label = 'Note'
             ..hideLabel = true
             ..placeholder = 'Type Here'
             ..onChange = _updateNoteText
-            ..value = state.noteText
+            ..value = state.noteText != null ? state.noteText : ''
+            ..isDisabled = state.noteText == null
           )()
         ),
         (BlockContent()..shrink = true)(
@@ -67,10 +72,14 @@ class NoteAreaComponent extends UiStatefulComponent<NoteAreaProps, NoteAreaState
   }
 
   void _updateNoteText(SyntheticFormEvent event) {
-    setState(newState()..noteText = event.target.value);
+    var noteText = event.target.value;
+    setState(newState()..noteText = noteText);
+    var modifiedNote = props.activeNote.change(text: noteText);
+    modifiedNote.updateNoteHashtags();
   }
 
   void _saveNoteText(_) {
-    props.updateNote(props.activeNote, state.noteText);
+    var modifiedNote = props.activeNote.change(text: state.noteText);
+    props.actions.editNote(modifiedNote);
   }
 }

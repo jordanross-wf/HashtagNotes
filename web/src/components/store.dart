@@ -1,7 +1,7 @@
 import 'package:w_flux/w_flux.dart';
 import 'actions.dart';
 import 'models/Note.dart';
-import 'package:uuid/uuid.dart';
+//import 'package:uuid/uuid.dart';
 
 class NoteStore extends Store {
   final NoteActions _actions;
@@ -15,16 +15,10 @@ class NoteStore extends Store {
     triggerOnAction(_actions.editNote, _editNote);
     triggerOnAction(_actions.deleteNote, _deleteNote);
     triggerOnAction(_actions.changeActiveNote, _changeActiveNote);
-
-//    manageActionSubscription(_actions.createNote.listen(_createNote));
-//    manageActionSubscription(_actions.editNote.listen(_editNote));
-//    manageActionSubscription(_actions.deleteNote.listen(_deleteNote));
-//    manageActionSubscription(_actions.changeActiveNote.listen(_changeActiveNote));
-
-    trigger();
   }
 
   Note get activeNote => _notesMap[_activeNoteId];
+
   List<Note> get notes {
     List<Note> notes = [];
     for (var note in _notesMap.values) {
@@ -48,6 +42,7 @@ class NoteStore extends Store {
   }
 
   _changeActiveNote(Note note) {
+    print('change active note called omg');
     _activeNoteId = note != null ? note.id : null;
   }
 
@@ -56,8 +51,9 @@ class NoteStore extends Store {
   }
 
   String generateUuid() {
-    var uuid = new Uuid();
-
-    return uuid.v4();
+//    var uuid = new Uuid();
+//
+//    return uuid.v4();
+    return '1a';
   }
 }

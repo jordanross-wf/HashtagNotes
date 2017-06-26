@@ -2,13 +2,14 @@ import 'package:web_skin_dart/ui_core.dart';
 import 'package:web_skin_dart/ui_components.dart';
 
 import 'models/Note.dart';
+import 'actions.dart';
 
 @Factory()
 UiFactory<EmptyNoteProps> EmptyNoteView;
 
 @Props()
 class EmptyNoteProps extends UiProps{
-  var createNote;
+  NoteActions actions;
 }
 
 @State()
@@ -18,13 +19,6 @@ class EmptyNoteState extends UiState{
 
 @Component()
 class EmptyNoteComponent extends UiStatefulComponent<EmptyNoteProps, EmptyNoteState>{
-  dynamic handleCreateNote(String text) {
-    var note = new Note(text: text);
-    if (this.props.createNote != null) {
-      this.props.createNote(note);
-    }
-  }
-
   @override
   render(){
     return (
@@ -39,6 +33,8 @@ class EmptyNoteComponent extends UiStatefulComponent<EmptyNoteProps, EmptyNoteSt
   }
 
   void _createEmptyNote(_) {
-    this.props.createNote(new Note(text: "My first note!"));
+    if (props.actions != null) {
+      props.actions.createNote(new Note(text: 'My first note!'));
+    }
   }
 }
