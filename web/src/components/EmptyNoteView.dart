@@ -8,28 +8,22 @@ import 'actions.dart';
 UiFactory<EmptyNoteProps> EmptyNoteView;
 
 @Props()
-class EmptyNoteProps extends UiProps{
+class EmptyNoteProps extends UiProps {
   NoteActions actions;
 }
 
 @State()
-class EmptyNoteState extends UiState{
+class EmptyNoteState extends UiState {
   String noteText;
 }
 
 @Component()
-class EmptyNoteComponent extends UiStatefulComponent<EmptyNoteProps, EmptyNoteState>{
+class EmptyNoteComponent
+    extends UiStatefulComponent<EmptyNoteProps, EmptyNoteState> {
   @override
-  render(){
-    return (
-        (EmptyView()
-          ..header = 'No Notes Found'
-        )(
-            (Button()
-              ..onClick = _createEmptyNote
-            )('Create a new note')
-        )
-    );
+  render() {
+    return ((EmptyView()..header = 'No Notes Found')(
+        (Button()..onClick = _createEmptyNote)('Create a new note')));
   }
 
   void _createEmptyNote(_) {

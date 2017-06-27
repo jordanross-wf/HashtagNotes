@@ -12,7 +12,8 @@ dev_dependencies:
       name: web_skin_dart
       url: https://pub.workiva.org
     version: "^1.23.2"
-  uuid: 0.5.0
+  dart_dev: "^1.0.0"
+  dart_style: ">=0.2.0 <0.3.0"
 
 transformers:
 - web_skin_dart

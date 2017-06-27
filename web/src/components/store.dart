@@ -9,8 +9,7 @@ class NoteStore extends Store {
   Map<String, Note> _notesMap = {};
   String _activeNoteId;
 
-  NoteStore(NoteActions actions)
-      : _actions = actions {
+  NoteStore(NoteActions actions) : _actions = actions {
     triggerOnAction(_actions.createNote, _createNote);
     triggerOnAction(_actions.editNote, _editNote);
     triggerOnAction(_actions.deleteNote, _deleteNote);

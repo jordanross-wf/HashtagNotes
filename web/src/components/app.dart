@@ -12,57 +12,35 @@ import 'store.dart' show NoteStore;
 UiFactory<AppProps> App;
 
 @Props()
-class AppProps extends FluxUiProps<NoteActions, NoteStore> {
-
-}
+class AppProps extends FluxUiProps<NoteActions, NoteStore> {}
 
 @Component()
-class AppComponent extends FluxUiComponent<AppProps>{
+class AppComponent extends FluxUiComponent<AppProps> {
   @override
   getDefaultProps() => (newProps());
 
   @override
-  render(){
-    return (Dom.div())(
-        Dom.h1()("Hashtag Notes!"),
-        renderNoteContent()
-    );
+  render() {
+    return (Dom.div())(Dom.h1()("Hashtag Notes!"), renderNoteContent());
   }
 
   dynamic renderNoteContent() {
     if (props.store != null && props.store.notes.isNotEmpty) {
       var activeNote = props.store.activeNote;
       return Block()(
-        (BlockContent()
-          ..shrink = true)(
-            TagList()()
-        ),
+        (BlockContent()..shrink = true)(TagList()()),
         (BlockContent()
           ..collapse = BlockCollapse.HORIZONTAL
-          ..shrink = true
-        )(
-            (NoteList()
-              ..notes = props.store.notes
-              ..actions = props.actions
-              ..activeNote = props.store.activeNote
-            )()
-        ),
-        (Block()
-          ..wrap = true)(
-            (NoteArea()
-              ..activeNote = props.store.activeNote
-              ..actions = props.actions
-            )()
-        ),
+          ..shrink = true)((NoteList()
+          ..notes = props.store.notes
+          ..actions = props.actions
+          ..activeNote = props.store.activeNote)()),
+        (Block()..wrap = true)((NoteArea()
+          ..activeNote = props.store.activeNote
+          ..actions = props.actions)()),
       );
     } else {
-      var savedProps = this.props;
-      var actions = savedProps.actions;
-      print('empty note gets props: $savedProps and actions: $actions');
-
-      return (EmptyNoteView()
-        ..actions = props.actions
-      )();
+      return (EmptyNoteView()..actions = props.actions)();
     }
   }
 }

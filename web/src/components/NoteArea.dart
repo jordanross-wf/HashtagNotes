@@ -8,7 +8,7 @@ import 'actions.dart';
 UiFactory<NoteAreaProps> NoteArea;
 
 @Props()
-class NoteAreaProps extends UiProps{
+class NoteAreaProps extends UiProps {
   Note activeNote;
   NoteActions actions;
 }
@@ -19,19 +19,14 @@ class NoteAreaState extends UiState {
 }
 
 @Component()
-class NoteAreaComponent extends UiStatefulComponent<NoteAreaProps, NoteAreaState>{
+class NoteAreaComponent
+    extends UiStatefulComponent<NoteAreaProps, NoteAreaState> {
   @override
   Map getInitialState() {
     if (props.activeNote != null) {
-      return (
-          newState()
-            ..noteText = props.activeNote.text
-      );
+      return (newState()..noteText = props.activeNote.text);
     } else {
-      return (
-        newState()
-          ..noteText = null
-      );
+      return (newState()..noteText = null);
     }
   }
 
@@ -46,29 +41,20 @@ class NoteAreaComponent extends UiStatefulComponent<NoteAreaProps, NoteAreaState
   }
 
   @override
-  render(){
-    return (
-      VBlock()(
-        (BlockContent()
-          ..shrink = true
-          ..collapse = BlockCollapse.BOTTOM
-        )(
-          (AutosizeTextarea()
-            ..label = 'Note'
-            ..hideLabel = true
-            ..placeholder = 'Type Here'
-            ..onChange = _updateNoteText
-            ..value = state.noteText != null ? state.noteText : ''
-            ..isDisabled = state.noteText == null
-          )()
-        ),
-        (BlockContent()..shrink = true)(
-          (Button()
-            ..onClick = _saveNoteText
-          )('Save')
-        ),
-      )
-    );
+  render() {
+    return (VBlock()(
+      (BlockContent()
+        ..shrink = true
+        ..collapse = BlockCollapse.BOTTOM)((AutosizeTextarea()
+        ..label = 'Note'
+        ..hideLabel = true
+        ..placeholder = 'Type Here'
+        ..onChange = _updateNoteText
+        ..value = state.noteText != null ? state.noteText : ''
+        ..isDisabled = state.noteText == null)()),
+      (BlockContent()
+        ..shrink = true)((Button()..onClick = _saveNoteText)('Save')),
+    ));
   }
 
   void _updateNoteText(SyntheticFormEvent event) {

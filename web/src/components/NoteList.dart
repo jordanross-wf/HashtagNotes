@@ -8,25 +8,20 @@ import 'actions.dart';
 UiFactory<NoteListProps> NoteList;
 
 @Props()
-class NoteListProps extends UiProps{
+class NoteListProps extends UiProps {
   List<Note> notes;
   NoteActions actions;
   Note activeNote;
 }
 
 @Component()
-class NoteListComponent extends UiComponent<NoteListProps>{
+class NoteListComponent extends UiComponent<NoteListProps> {
   @override
-  render(){
-    return (
-        (ListGroup()
-          ..isBordered = true
-          ..style = {'maxWidth': '30rem'}
-          ..size = ListGroupSize.LARGE
-        )(
-            renderNotes()
-        )
-    );
+  render() {
+    return ((ListGroup()
+      ..isBordered = true
+      ..style = {'maxWidth': '30rem'}
+      ..size = ListGroupSize.LARGE)(renderNotes()));
   }
 
   @override
@@ -51,16 +46,14 @@ class NoteListComponent extends UiComponent<NoteListProps>{
           ..key = index
           ..targetKey = index++
           ..onSelect = _handleListSelect
-          ..isActive = note == props.activeNote
-        )(previewText);
+          ..isActive = note == props.activeNote)(previewText);
         notes.add(listItem);
       }
 
       notes.add((ListGroupItem()
         ..key = -1
         ..targetKey = -1
-        ..onSelect = _handleListSelect
-      )('Create New Note'));
+        ..onSelect = _handleListSelect)('Create New Note'));
 
       return notes;
     }

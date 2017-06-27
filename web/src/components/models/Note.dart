@@ -5,20 +5,16 @@ class Note {
   String id;
   Set<Tag> noteHashtags = new Set();
 
-  Note(
-      {String this.text,
-      String this.id: '1a'});
+  Note({String this.text, String this.id: '1a'});
 
   Note change({String text, String id}) {
     String rText = text != null ? text : this.text;
     String rId = id != null ? id : this.id;
 
-    return new Note(
-        text: rText,
-        id: rId);
+    return new Note(text: rText, id: rId);
   }
 
-  Set<Tag> getTags(){
+  Set<Tag> getTags() {
     return noteHashtags;
   }
 
