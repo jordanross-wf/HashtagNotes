@@ -14,6 +14,8 @@ dev_dependencies:
     version: "^1.23.2"
   dart_dev: "^1.0.0"
   dart_style: ">=0.2.0 <0.3.0"
+  uuid: "0.5.3"
+  hotkey: "0.1.2"
 
 transformers:
 - web_skin_dart

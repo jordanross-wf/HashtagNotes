@@ -28,7 +28,7 @@ class AppComponent extends FluxUiComponent<AppProps> {
     if (props.store != null && props.store.notes.isNotEmpty) {
       var activeNote = props.store.activeNote;
       return Block()(
-        (BlockContent()..shrink = true)(TagList()()),
+        (BlockContent()..shrink = true)((TagList()..tags = props.store.tags)()),
         (BlockContent()
           ..collapse = BlockCollapse.HORIZONTAL
           ..shrink = true)((NoteList()

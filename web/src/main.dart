@@ -6,6 +6,8 @@ import 'components/app.dart';
 
 import 'package:web_skin_dart/ui_components.dart';
 
+import 'package:hotkey/hotkey.dart' as hotkey;
+
 import 'components/actions.dart' show NoteActions;
 import 'components/store.dart' show NoteStore;
 
@@ -17,6 +19,11 @@ void main() {
 
   var _actions = new NoteActions();
   var _store = new NoteStore(_actions);
+
+  hotkey.add('CTRL+N', () => _actions.createNote());
+  hotkey.add('CTRL+S', () => _actions.editNote());
+  hotkey.enable();
+
   react_dom.render(
       (App()
         ..className = "SimpleApp"

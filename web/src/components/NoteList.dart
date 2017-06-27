@@ -24,15 +24,6 @@ class NoteListComponent extends UiComponent<NoteListProps> {
       ..size = ListGroupSize.LARGE)(renderNotes()));
   }
 
-  @override
-  void componentWillReceiveProps(Map nextProps) {
-    super.componentWillReceiveProps(nextProps);
-
-    if (nextProps.containsKey('NoteListProps.activeNote')) {
-      Note nextNote = nextProps['NoteListProps.activeNote'];
-    }
-  }
-
   List renderNotes() {
     List notes = [];
     if (this.props.notes.isNotEmpty) {
@@ -41,6 +32,7 @@ class NoteListComponent extends UiComponent<NoteListProps> {
         var noteText = note.text;
         var previewEnd = min(14, noteText.length);
         var previewText = noteText.substring(0, previewEnd);
+        previewText = previewText.isEmpty ? 'Untitled' : previewText;
 
         var listItem = (ListGroupItem()
           ..key = index
@@ -54,7 +46,6 @@ class NoteListComponent extends UiComponent<NoteListProps> {
         ..key = -1
         ..targetKey = -1
         ..onSelect = _handleListSelect)('Create New Note'));
-
       return notes;
     }
 

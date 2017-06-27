@@ -60,12 +60,11 @@ class NoteAreaComponent
   void _updateNoteText(SyntheticFormEvent event) {
     var noteText = event.target.value;
     setState(newState()..noteText = noteText);
-    var modifiedNote = props.activeNote.change(text: noteText);
-    modifiedNote.updateNoteHashtags();
   }
 
   void _saveNoteText(_) {
     var modifiedNote = props.activeNote.change(text: state.noteText);
+    modifiedNote.updateNoteHashtags();
     props.actions.editNote(modifiedNote);
   }
 }
