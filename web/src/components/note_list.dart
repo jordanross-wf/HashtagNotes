@@ -14,15 +14,31 @@ class NoteListProps extends UiProps {
   Note activeNote;
 }
 
+@State()
+class NoteListState extends UiState {
+  String searchTerm;
+}
+
 @Component()
-class NoteListComponent extends UiComponent<NoteListProps> {
+class NoteListComponent extends UiStatefulComponent<NoteListProps, NoteListState> {
+  @override
+  Map getInitialState() {
+    return (newState()..searchTerm = '');
+  }
+
   @override
   render() {
     return ((VBlock()..isNested = false)(
+        (SearchInput()
+          ..label = 'Notes Search'
+          ..hideLabel = true
+          ..onChange = _handleSearchValueChanged
+        )(),
         (ListGroup()
           ..isBordered = true
           ..style = {'maxWidth': '30rem'}
-          ..size = ListGroupSize.LARGE)(renderNotes()),
+          ..size = ListGroupSize.LARGE)(renderNotes()
+        ),
         (Button()
           ..onClick = (_) {
             props.actions.createNote(new Note(text: 'A new note!'));
@@ -44,12 +60,21 @@ class NoteListComponent extends UiComponent<NoteListProps> {
           ..targetKey = index++
           ..onSelect = _handleListSelect
           ..isActive = note == props.activeNote)(previewText);
+
+        if (state.searchTerm.isNotEmpty && !note.text.contains(state.searchTerm)){
+          continue;
+        }
         notes.add(listItem);
       }
       return notes;
     }
 
     return null;
+  }
+
+  void _handleSearchValueChanged(SyntheticFormEvent event) {
+    //Perform search/filter
+    setState(newState()..searchTerm = event.target.value);
   }
 
   void _handleListSelect(SyntheticMouseEvent event, Object targetKey) {

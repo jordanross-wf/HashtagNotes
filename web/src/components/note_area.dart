@@ -59,7 +59,8 @@ class NoteAreaComponent
         ..hideLabel = true
         ..placeholder = 'Type Here'
         ..onChange = _updateNoteText
-        ..onFocus = _focusHandler
+        ..onFocus = _focusGainedHandler
+        ..onBlur = _focusLostHandler
         ..value = state.noteText != null ? state.noteText : ''
         ..isDisabled = state.noteText == null)()),
       (BlockContent()
@@ -83,8 +84,12 @@ class NoteAreaComponent
     props.actions.editNote(modifiedNote);
   }
 
-  void _focusHandler(SyntheticFocusEvent event) {
-    //Seems to only handle focus gained events
+  void _focusGainedHandler(SyntheticFocusEvent event) {
+    // Do whatever we want when focusing on the text area. Dim/fade the other columns?
+  }
+
+  void _focusLostHandler(SyntheticFocusEvent event) {
+    _saveNoteText(null);
   }
 
   startTimeout([int milliseconds]) {
