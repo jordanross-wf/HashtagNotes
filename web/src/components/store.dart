@@ -26,7 +26,10 @@ class NoteStore extends Store {
   List<Note> get notes {
     List<Note> notes = [];
     for (var note in _notesMap.values) {
-      notes.add(note);
+      var unionSet = note.noteHashtags.intersection(_activeTags);
+      if (_activeTags.length == 0 || unionSet.length > 0) {
+        notes.add(note);
+      }
     }
 
     return []..addAll(notes.reversed);
@@ -75,9 +78,6 @@ class NoteStore extends Store {
 
         if (_tagMap[tag].length == 0) {
           _tagMap.remove(tag);
-          print('Removed $tag from tagMap entirely');
-        } else {
-          print('Removed note from tag $tag');
         }
       }
     }
@@ -90,7 +90,6 @@ class NoteStore extends Store {
   }
 
   _changeActiveNote(Note note) {
-    print('changing active note to: $note');
     _activeNoteId = note != null ? note.id : null;
   }
 

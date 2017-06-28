@@ -51,8 +51,6 @@ class Note {
       /* Also update global tags by union.
         Need to eventually account for removing tags from global as well, since
         this will handle local by default but not global */
-      print(
-          'noteHashtags is $noteHashtags and removedNoteHashtags is $removedNoteHashtags');
     }
   }
 

@@ -79,7 +79,7 @@ class NoteAreaComponent
     props.actions.editNote(modifiedNote);
   }
 
-  void _focusHandler(SyntheticFocusEvent event){
+  void _focusHandler(SyntheticFocusEvent event) {
     //Seems to only handle focus gained events
   }
 
@@ -88,7 +88,8 @@ class NoteAreaComponent
     return new Timer(duration, handleTimeout);
   }
 
-  void handleTimeout() {  // callback function
+  void handleTimeout() {
+    // callback function
     _saveNoteText(null);
     print('Autosaving Note');
   }

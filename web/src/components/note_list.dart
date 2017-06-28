@@ -18,17 +18,15 @@ class NoteListProps extends UiProps {
 class NoteListComponent extends UiComponent<NoteListProps> {
   @override
   render() {
-    return (
-      (VBlock()..isNested = false)(
+    return ((VBlock()..isNested = false)(
         (ListGroup()
           ..isBordered = true
           ..style = {'maxWidth': '30rem'}
           ..size = ListGroupSize.LARGE)(renderNotes()),
         (Button()
-          ..onClick = (_){ props.actions.createNote(new Note(text: 'A new note!')); }
-        )('Create New Note')
-      )
-    );
+          ..onClick = (_) {
+            props.actions.createNote(new Note(text: 'A new note!'));
+          })('Create New Note')));
   }
 
   List renderNotes() {
@@ -48,11 +46,6 @@ class NoteListComponent extends UiComponent<NoteListProps> {
           ..isActive = note == props.activeNote)(previewText);
         notes.add(listItem);
       }
-
-//      notes.add((ListGroupItem()
-//        ..key = -1
-//        ..targetKey = -1
-//        ..onSelect = _handleListSelect)('Create New Note'));
       return notes;
     }
 
@@ -60,10 +53,9 @@ class NoteListComponent extends UiComponent<NoteListProps> {
   }
 
   void _handleListSelect(SyntheticMouseEvent event, Object targetKey) {
-    if (targetKey == -1) {
-      props.actions.createNote(new Note(text: 'A new note!'));
-    } else {
-      Note note = props.notes[targetKey];
+    int targetKeyIndex = targetKey;
+    if (targetKeyIndex >= 0 && targetKeyIndex < props.notes.length) {
+      Note note = props.notes[targetKeyIndex];
       props.actions.changeActiveNote(note);
     }
   }
