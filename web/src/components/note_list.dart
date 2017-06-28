@@ -1,6 +1,6 @@
 import 'package:web_skin_dart/ui_core.dart';
 import 'package:web_skin_dart/ui_components.dart';
-import 'models/Note.dart';
+import 'models/note.dart';
 import 'dart:math';
 import 'actions.dart';
 
@@ -18,10 +18,17 @@ class NoteListProps extends UiProps {
 class NoteListComponent extends UiComponent<NoteListProps> {
   @override
   render() {
-    return ((ListGroup()
-      ..isBordered = true
-      ..style = {'maxWidth': '30rem'}
-      ..size = ListGroupSize.LARGE)(renderNotes()));
+    return (
+      (VBlock()..isNested = false)(
+        (ListGroup()
+          ..isBordered = true
+          ..style = {'maxWidth': '30rem'}
+          ..size = ListGroupSize.LARGE)(renderNotes()),
+        (Button()
+          ..onClick = (_){ props.actions.createNote(new Note(text: 'A new note!')); }
+        )('Create New Note')
+      )
+    );
   }
 
   List renderNotes() {
@@ -42,10 +49,10 @@ class NoteListComponent extends UiComponent<NoteListProps> {
         notes.add(listItem);
       }
 
-      notes.add((ListGroupItem()
-        ..key = -1
-        ..targetKey = -1
-        ..onSelect = _handleListSelect)('Create New Note'));
+//      notes.add((ListGroupItem()
+//        ..key = -1
+//        ..targetKey = -1
+//        ..onSelect = _handleListSelect)('Create New Note'));
       return notes;
     }
 

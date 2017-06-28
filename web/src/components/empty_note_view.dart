@@ -1,7 +1,7 @@
 import 'package:web_skin_dart/ui_core.dart';
 import 'package:web_skin_dart/ui_components.dart';
 
-import 'models/Note.dart';
+import 'models/note.dart';
 import 'actions.dart';
 
 @Factory()

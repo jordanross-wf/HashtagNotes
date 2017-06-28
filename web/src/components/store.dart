@@ -1,7 +1,7 @@
 import 'package:w_flux/w_flux.dart';
 import 'actions.dart';
-import 'models/Note.dart';
-import 'models/Tag.dart';
+import 'models/note.dart';
+import 'models/tag.dart';
 
 class NoteStore extends Store {
   final NoteActions _actions;
@@ -9,12 +9,16 @@ class NoteStore extends Store {
   Map<String, Note> _notesMap = {};
   Map<Tag, Set<Note>> _tagMap = {};
   String _activeNoteId;
+  Set<Tag> _activeTags = new Set();
 
   NoteStore(NoteActions actions) : _actions = actions {
     triggerOnAction(_actions.createNote, _createNote);
     triggerOnAction(_actions.editNote, _editNote);
     triggerOnAction(_actions.deleteNote, _deleteNote);
     triggerOnAction(_actions.changeActiveNote, _changeActiveNote);
+    triggerOnAction(_actions.selectTag, _selectTag);
+    triggerOnAction(_actions.deselectTag, _deselectTag);
+    triggerOnAction(_actions.toggleTag, _toggleTag);
   }
 
   Note get activeNote => _notesMap[_activeNoteId];
@@ -27,6 +31,8 @@ class NoteStore extends Store {
 
     return []..addAll(notes.reversed);
   }
+
+  Set<Tag> get activeTags => _activeTags;
 
   List<Tag> get tags {
     List<Tag> tags = [];
@@ -86,6 +92,22 @@ class NoteStore extends Store {
   _changeActiveNote(Note note) {
     print('changing active note to: $note');
     _activeNoteId = note != null ? note.id : null;
+  }
+
+  _selectTag(Tag tag) {
+    _activeTags.add(tag);
+  }
+
+  _deselectTag(Tag tag) {
+    _activeTags.remove(tag);
+  }
+
+  _toggleTag(Tag tag) {
+    if (_activeTags.contains(tag)) {
+      _activeTags.remove(tag);
+    } else {
+      _activeTags.add(tag);
+    }
   }
 
   bool hasNotes() {

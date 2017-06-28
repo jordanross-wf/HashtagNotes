@@ -1,4 +1,4 @@
-import 'Tag.dart';
+import 'tag.dart';
 import 'package:uuid/uuid.dart';
 import 'package:collection/collection.dart';
 

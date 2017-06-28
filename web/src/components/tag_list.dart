@@ -2,7 +2,7 @@ import 'package:web_skin_dart/ui_core.dart';
 import 'package:web_skin_dart/ui_components.dart';
 
 import 'actions.dart';
-import 'models/Tag.dart';
+import 'models/tag.dart';
 
 @Factory()
 UiFactory<TagListProps> TagList;
@@ -11,7 +11,7 @@ UiFactory<TagListProps> TagList;
 class TagListProps extends UiProps {
   List<Tag> tags;
   NoteActions actions;
-  Tag activeTag;
+  Set<Tag> activeTags;
 }
 
 @Component()
@@ -29,12 +29,23 @@ class TagListComponent extends UiComponent<TagListProps> {
       List tagList = [];
 
       for (Tag tagItem in props.tags) {
-        var navItem = (NavItem()..key = tagItem.title)(tagItem.title);
+        var navItem = (NavItem()
+          ..key = tagItem.title
+          ..targetKey = tagItem.title
+          ..onSelect = _selectTag
+          ..skin = props.activeTags.contains(tagItem) ? NavItemPillSkin.ALT : NavItemPillSkin.DEFAULT
+        )(tagItem.title);
         tagList.add(navItem);
       }
 
       print('Should be rendering tagList: ${props.tags}');
       return tagList;
     }
+  }
+
+  _selectTag(SyntheticEvent e, Object o) {
+    String tagTitle = o;
+    Tag tag = new Tag(tagTitle);
+    props.actions.toggleTag(tag);
   }
 }

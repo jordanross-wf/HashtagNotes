@@ -1,10 +1,10 @@
 import 'package:web_skin_dart/ui_core.dart';
 import 'package:web_skin_dart/ui_components.dart';
 
-import 'TagList.dart';
-import 'NoteArea.dart';
-import 'NoteList.dart';
-import 'EmptyNoteView.dart';
+import 'tag_list.dart';
+import 'note_area.dart';
+import 'note_list.dart';
+import 'empty_note_view.dart';
 import 'actions.dart' show NoteActions;
 import 'store.dart' show NoteStore;
 
@@ -21,14 +21,30 @@ class AppComponent extends FluxUiComponent<AppProps> {
 
   @override
   render() {
-    return (Dom.div())(Dom.h1()("Hashtag Notes!"), renderNoteContent());
+    return (VBlock()
+      ..isNested = false
+    )(
+      (BlockContent()
+        ..align = BlockAlign.CENTER
+        ..shrink = true)
+      (
+        (Dom.h1())('Hashtag Notes!'),
+      ),
+      renderNoteContent()
+    );
   }
 
   dynamic renderNoteContent() {
     if (props.store != null && props.store.notes.isNotEmpty) {
-      var activeNote = props.store.activeNote;
-      return Block()(
-        (BlockContent()..shrink = true)((TagList()..tags = props.store.tags)()),
+      return (Block()
+        ..overflow = true
+      )(
+        (BlockContent()..shrink = true)(
+            (TagList()
+              ..tags = props.store.tags
+              ..activeTags = props.store.activeTags
+              ..actions = props.actions
+            )()),
         (BlockContent()
           ..collapse = BlockCollapse.HORIZONTAL
           ..shrink = true)((NoteList()
