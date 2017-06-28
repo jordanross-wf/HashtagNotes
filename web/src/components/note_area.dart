@@ -38,9 +38,13 @@ class NoteAreaComponent
   @override
   void componentWillReceiveProps(Map nextProps) {
     super.componentWillReceiveProps(nextProps);
-
     if (nextProps.containsKey('NoteAreaProps.activeNote')) {
       Note nextNote = nextProps['NoteAreaProps.activeNote'];
+
+      if (props.activeNote != null && (nextNote != props.activeNote
+          || (nextNote == props.activeNote && props.activeNote.text != state.noteText))) {
+        _saveNoteText(null);
+      }
       setState(newState()..noteText = nextNote != null ? nextNote.text : null);
     }
   }
