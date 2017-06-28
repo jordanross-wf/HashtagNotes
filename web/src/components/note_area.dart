@@ -1,5 +1,6 @@
 import 'package:web_skin_dart/ui_core.dart';
 import 'package:web_skin_dart/ui_components.dart';
+import 'dart:async';
 
 import 'models/note.dart';
 import 'actions.dart';
@@ -21,6 +22,10 @@ class NoteAreaState extends UiState {
 @Component()
 class NoteAreaComponent
     extends UiStatefulComponent<NoteAreaProps, NoteAreaState> {
+  static const TIMEOUT = const Duration(seconds: 2);
+  static const ms = const Duration(milliseconds: 1);
+  Timer saveNoteTimer;
+
   @override
   Map getInitialState() {
     if (props.activeNote != null) {
@@ -50,6 +55,7 @@ class NoteAreaComponent
         ..hideLabel = true
         ..placeholder = 'Type Here'
         ..onChange = _updateNoteText
+        ..onFocus = _focusHandler
         ..value = state.noteText != null ? state.noteText : ''
         ..isDisabled = state.noteText == null)()),
       (BlockContent()
@@ -60,11 +66,30 @@ class NoteAreaComponent
   void _updateNoteText(SyntheticFormEvent event) {
     var noteText = event.target.value;
     setState(newState()..noteText = noteText);
+
+    if (saveNoteTimer != null && saveNoteTimer.isActive) {
+      saveNoteTimer.cancel();
+    }
+    saveNoteTimer = startTimeout();
   }
 
   void _saveNoteText(_) {
     var modifiedNote = props.activeNote.change(text: state.noteText);
     modifiedNote.updateNoteHashtags();
     props.actions.editNote(modifiedNote);
+  }
+
+  void _focusHandler(SyntheticFocusEvent event){
+    //Seems to only handle focus gained events
+  }
+
+  startTimeout([int milliseconds]) {
+    var duration = milliseconds == null ? TIMEOUT : ms * milliseconds;
+    return new Timer(duration, handleTimeout);
+  }
+
+  void handleTimeout() {  // callback function
+    _saveNoteText(null);
+    print('Autosaving Note');
   }
 }
