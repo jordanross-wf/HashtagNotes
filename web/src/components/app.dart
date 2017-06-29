@@ -21,28 +21,35 @@ class AppComponent extends FluxUiComponent<AppProps> {
 
   @override
   render() {
-    return (VBlock()..isNested = false)(
-        (BlockContent()
-          ..align = BlockAlign.CENTER
-          ..shrink = true)(
-          (Dom.h1())('Hashtag Notes!'),
-        ),
+    return (GridFrame())(
         renderNoteContent());
   }
 
   dynamic renderNoteContent() {
     if (props.store != null && props.store.notes.isNotEmpty) {
       return (Block()..overflow = true)(
-        (BlockContent()..shrink = true)((TagList()
+        (BlockContent()
+          ..shrink = true
+          ..className = 'taglist')((TagList()
           ..tags = props.store.tags
           ..activeTags = props.store.activeTags
           ..actions = props.actions)()),
-        (BlockContent()
-          ..collapse = BlockCollapse.HORIZONTAL
-          ..shrink = true)((NoteList()
-          ..notes = props.store.notes
-          ..actions = props.actions
-          ..activeNote = props.store.activeNote)()),
+        (Block()
+          ..className = 'notelist'
+          ..gutter = BlockGutter.HORIZONTAL
+          ..shrink = true)
+          (
+            (BlockContent()
+              ..collapse = BlockCollapse.HORIZONTAL
+              ..shrink = true
+            )
+              (
+                (NoteList()
+                  ..notes = props.store.notes
+                  ..actions = props.actions
+                  ..activeNote = props.store.activeNote)()
+            )
+          ),
         (Block()..wrap = true)((NoteArea()
           ..activeNote = props.store.activeNote
           ..actions = props.actions)()),

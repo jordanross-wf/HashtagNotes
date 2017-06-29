@@ -33,9 +33,12 @@ class TagListComponent extends UiComponent<TagListProps> {
           ..key = tagItem.title
           ..targetKey = tagItem.title
           ..onSelect = _selectTag
+          ..className = 'tags'
           ..skin = props.activeTags.contains(tagItem)
               ? NavItemPillSkin.ALT
-              : NavItemPillSkin.DEFAULT)(tagItem.title);
+              : NavItemPillSkin.DEFAULT
+        )
+          (tagItem.title);
         tagList.add(navItem);
       }
 

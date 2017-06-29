@@ -52,6 +52,14 @@ class NoteAreaComponent
   @override
   render() {
     return (VBlock()(
+      (BlockContent()..shrink = true)(
+          (Button()..onClick = _saveNoteText) (
+              (Icon()
+                ..glyph = IconGlyph.FILE_SAVE
+              )(),
+              'Save Note'
+          )
+      ),
       (BlockContent()
         ..shrink = true
         ..collapse = BlockCollapse.BOTTOM)((AutosizeTextarea()
@@ -63,8 +71,6 @@ class NoteAreaComponent
         ..onBlur = _focusLostHandler
         ..value = state.noteText != null ? state.noteText : ''
         ..isDisabled = state.noteText == null)()),
-      (BlockContent()
-        ..shrink = true)((Button()..onClick = _saveNoteText)('Save')),
     ));
   }
 

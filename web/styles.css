@@ -1,5 +1,19 @@
 .SimpleApp {
-  max-width: 60rem;
   margin: 0 auto;
+  height: 100%;
   background-color: #fff;
+}
+
+.taglist {
+    background-color: #262626;
+    min-width: 178px;
+}
+
+.notelist {
+    background-color: #F7F7F7;
+}
+
+.tags {
+    background-color: transparent;
+    color: white;
 }
