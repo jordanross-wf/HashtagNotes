@@ -18,10 +18,15 @@ class TagListProps extends UiProps {
 class TagListComponent extends UiComponent<TagListProps> {
   @override
   render() {
-    return ((Nav()
+    return (BlockContent()(
+    Dom.h3()(
+      'Tags'
+    ),
+    (Nav()
       ..type = NavType.PILLS
+      ..className = 'tags'
       ..isStacked = true
-      ..style = {'maxWidth': '30rem'})(renderTags()));
+      ..style = {'maxWidth': '30rem'})(renderTags())));
   }
 
   List renderTags() {

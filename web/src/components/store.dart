@@ -43,7 +43,8 @@ class NoteStore extends Store {
       tags.add(tag);
     }
 
-    return []..addAll(tags.reversed);
+    tags.sort((a, b) => a.toString().compareTo(b.toString()));
+    return []..addAll(tags);
   }
 
   _createNote(Note note) {

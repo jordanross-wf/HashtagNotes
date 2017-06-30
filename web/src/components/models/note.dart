@@ -34,23 +34,33 @@ class Note {
   }
 
   void updateNoteHashtags() {
-    RegExp exp = new RegExp(r"(#\w+)");
-    Iterable<Match> matches = exp.allMatches(text);
+    RegExp expAllTagLevels = new RegExp(r"(#\w+[\/\w+]*)");
+    Iterable<Match> parentTagMatches = expAllTagLevels.allMatches(text);
 
     Set<Tag> newTagSet = new Set();
 
-    for (var hashtagMatch in matches) {
+    for (var hashtagMatch in parentTagMatches) {
       Tag newTag = new Tag(hashtagMatch.group(0).trim());
 
       newTagSet.add(newTag);
+    }
+
+    for (var hashmatch in parentTagMatches) {
+      String tagString = hashmatch.group(0);
+      int slashIndex = tagString.indexOf("/");
+      Tag parentTag = null;
+
+      if (slashIndex != -1) {
+        parentTag = new Tag(tagString.substring(0,slashIndex).trim());
+        newTagSet.add(parentTag);
+      }
+
+      newTagSet.add(new Tag.withParent(tagString.trim(), parentTag));
     }
     var se = const SetEquality();
     if (!se.equals(noteHashtags, newTagSet)) {
       removedNoteHashtags.addAll(noteHashtags.difference(newTagSet));
       noteHashtags = newTagSet;
-      /* Also update global tags by union.
-        Need to eventually account for removing tags from global as well, since
-        this will handle local by default but not global */
     }
   }
 
