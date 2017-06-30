@@ -3,6 +3,8 @@ import 'package:web_skin_dart/ui_components.dart';
 import 'models/note.dart';
 import 'dart:math';
 import 'actions.dart';
+import 'dart:html';
+import 'package:hotkey/hotkey.dart' as hotkey;
 
 @Factory()
 UiFactory<NoteListProps> NoteList;
@@ -28,8 +30,10 @@ class NoteListComponent extends UiStatefulComponent<NoteListProps, NoteListState
 
   @override
   render() {
+    hotkey.add('ctrl+f', focusSearch);
     return ((VBlock()..isNested = false)(
         (SearchInput()
+          ..id = 'searchfield'
           ..label = 'Notes Search'
           ..hideLabel = true
           ..onChange = _handleSearchValueChanged
@@ -70,6 +74,10 @@ class NoteListComponent extends UiStatefulComponent<NoteListProps, NoteListState
     }
 
     return null;
+  }
+
+  void focusSearch (){
+    querySelector('#searchfield').focus();
   }
 
   void _handleSearchValueChanged(SyntheticFormEvent event) {
