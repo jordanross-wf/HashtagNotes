@@ -29,8 +29,12 @@ class NoteListComponent extends UiStatefulComponent<NoteListProps, NoteListState
   }
 
   @override
-  render() {
+  componentDidMount () {
     hotkey.add('ctrl+f', focusSearch);
+  }
+
+  @override
+  render() {
     return ((VBlock()..isNested = false)(
         (SearchInput()
           ..id = 'searchfield'
